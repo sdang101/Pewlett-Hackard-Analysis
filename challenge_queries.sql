@@ -27,6 +27,20 @@ FROM
  FROM challenge_retiring_emp as cre
  ) tmp WHERE rn = 1
 ORDER BY emp_no;
+DROP TABLE challenge_mentor_info
+
+-- Number of titles retiring
+SELECT *, COUNT(rt.emp_no)
+	OVER (PARTITION BY rt.title
+		 ORDER BY rt.from_date DESC) AS emp_count
+INTO challenge_title_info
+FROM retiring_emp_by_title as rt
+
+SELECT COUNT(emp_no), title
+INTO challenge_title_count
+FROM challenge_title_info
+GROUP BY title;
+
 
 -- Deliverable 2: Mentorship Eligibility
 SELECT e.emp_no
@@ -35,7 +49,17 @@ SELECT e.emp_no
 	, t.title
 	, t.from_date
 	, t.to_date
+INTO challenge_mentor_info
 FROM employees AS e
 	INNER JOIN titles AS t
 		ON (e.emp_no = t.emp_no)
-WHERE (birth_date BETWEEN '01-01-1965' AND '12-31-1965')
+	INNER JOIN dept_emp AS de
+		ON (e.emp_no = de.emp_no)
+WHERE (birth_date BETWEEN '1965-01-01' AND '1965-12-31')
+	AND (t.to_date = '9999-01-01');
+
+SELECT COUNT(emp_no)
+FROM challenge_mentor_info;	
+
+SELECT COUNT(emp_no)
+FROM challenge_title_info;
