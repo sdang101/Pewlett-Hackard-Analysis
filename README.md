@@ -23,3 +23,9 @@ We are given an assignment to determine employees that are to retire (Jan 1, 195
 1. Table containing employees who are eligible for the mentorship ->
 ![challenge_mentor_info](https://github.com/sdang101/Pewlett-Hackard-Analysis/blob/master/challenge/challenge_mentor_info.csv)
 ![2](https://github.com/sdang101/Pewlett-Hackard-Analysis/blob/master/Photos/2.png)
+
+## Delivering Results
+- Number of individuals retiring: 33,118
+- Number of individuals available for mentorship role: 1,708
+- To furthur the analyze the data, we can separate the retirement years (1952 - 1955) into separate years in the WHERE statement to determine which positions need hiring first
+
